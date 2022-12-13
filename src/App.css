@@ -1,0 +1,16 @@
+@import url(common.css);
+
+.App {
+  display: grid;
+  grid-template-rows: 100px 1fr 100px;
+  grid-template-columns: 2fr 10fr;
+  grid-template-areas:
+    "header header"
+    "side-panel content"
+    "footer footer";
+}
+
+.content {
+  grid-area: content;
+  background-color: var(--color-second-accent);
+}

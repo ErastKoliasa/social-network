@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@200;400;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-family: 'Exo', sans-serif;
+    --color-main: #FCC950;
+    --color-dark-shade: #7781FF;
+    --color-first-accent: #f06d15;
+    --color-second-accent: #FCFAF6;
+}

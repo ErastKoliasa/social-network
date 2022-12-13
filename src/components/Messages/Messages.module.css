@@ -1,0 +1,22 @@
+.messages {
+    display: grid;
+    grid-template-columns: 3fr 10fr;
+    padding: 40px;
+}
+
+.conversationsItem {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.dialogsItem {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}

@@ -1,0 +1,30 @@
+.sidePanel {
+  grid-area: side-panel;
+  background-color: var(--color-main);
+}
+
+.listNav {
+  margin: 20px;
+  padding: 20px;
+  list-style-type: none;
+  border: 2px solid var(--color-first-accent);
+  border-radius: 10px;
+  box-shadow: 5px 8px 25px -8px rgb(68, 67, 67);
+}
+
+.listItem {
+  padding: 10px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.link {
+  color: var(--color-second-accent);
+  text-decoration: none;
+}
+
+.active {
+  color: var(--color-first-accent);
+  text-decoration: none;
+ }
