@@ -1,3 +1,4 @@
+let rerenderTree;
 const state = {
     profilePage: {
         postsData: [
@@ -5,7 +6,8 @@ const state = {
             { id: 2, post: "post 2" },
             { id: 3, post: "post 3" },
             { id: 4, post: "post 4" }
-        ]
+        ],
+        newPostText: ""
     },
     messagesPage: {
         conversationsData: [
@@ -19,6 +21,24 @@ const state = {
             { id: 3, messages: "What are you doing?" }
         ]
     }
+}
+
+export const addNewPost = () => {
+    const newPost = {
+        id: 5,
+        post: state.profilePage.newPostText
+    };
+    state.profilePage.postsData.push(newPost);
+    updateNewPostText("");
+}
+
+export const updateNewPostText = (newText) => {
+    state.profilePage.newPostText = newText;
+    rerenderTree(state);
+}
+
+export const subscribe = (observer) => {
+    rerenderTree = observer;
 }
 
 export default state

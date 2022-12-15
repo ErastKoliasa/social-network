@@ -3,12 +3,29 @@ import styles from './MyPosts.module.css'
 import Post from './Post/Post';
 
 const MyPosts = (props) => {
-    const posts = props.state.postsData.map(data => <Post post={data.post} />)
+    const posts = props.postsData.map(data => <Post post={data.post} />)
+
+    const newMyPost = React.createRef();
+
+    const addPost = () => {
+        props.addNewPost();
+    }
+
+    const onPostChange = () => {
+        const text = newMyPost.current.value;
+        props.updateNewPostText(text);
+    }
+
     return (
         <div className={styles.myPosts}>
-            <textarea></textarea>
-            <button>Add Post</button>
-            {posts}
+            <h3 className={styles.title}>My Posts</h3>
+            <div className={styles.containerInputBtn}>
+                <textarea ref={newMyPost} className={styles.textInput} onChange={onPostChange} value={props.newPostText}></textarea>
+                <button onClick={addPost} className={styles.btnInput}>Add Post</button>
+            </div>
+            <div className={styles.postItem}>
+                {posts}
+            </div>
         </div>
 
     )

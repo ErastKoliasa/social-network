@@ -3,7 +3,10 @@ import styles from '../Messages.module.css'
 
 const DialogsItem = (props) => {
     return (
-        <p className={styles.dialogsItem}>{props.messages}</p>
+        <div>
+            <p className={styles.dialogsItem}>{props.messages}</p>
+        </div>
+
     )
 }
 
