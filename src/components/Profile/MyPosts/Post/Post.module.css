@@ -1,0 +1,11 @@
+.posts {
+    display: flex;
+    padding-top: 50px;
+}
+.avatar {
+    width: 75px;
+}
+.postItem{
+    margin: 10px 30px;
+    
+}
