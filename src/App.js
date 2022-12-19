@@ -3,18 +3,18 @@ import './App.css'
 import NavBar from './components/NavBar/NavBar';
 import Profile from './components/Profile/Profile';
 import Footer from './components/Footer/Footer';
-import Messages from './components/Messages/Messages';
 import { Routes, Route } from "react-router-dom";
+import MessagesContainer from './components/Messages/MessagesContainer';
 
-const App = (props) => {
+const App = () => {
   return (
     <div className='App'>
       <Header />
       <NavBar />
       <div className='content'>
         <Routes>
-          <Route path="/messages" element={<Messages messagesPage={props.state.messagesPage} dispatch={props.dispatch}/>} />
-          <Route path="/profile" element={<Profile profilePage={props.state.profilePage} dispatch={props.dispatch} />} />
+          <Route path="/messages" element={<MessagesContainer />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
       <Footer />
