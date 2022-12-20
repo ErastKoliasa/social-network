@@ -1,0 +1,82 @@
+.users {
+    padding: 70px;
+}
+
+.title {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--color-dark-shade);
+}
+
+.userCard {
+    padding: 20px;
+    margin: 20px 0px;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.containerPhotoBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar {
+    width: 150px;
+}
+
+.userCardBtnFollow {
+    margin-top: 10px;
+    height: 50px;
+    width: 125px;
+    border-radius: 20px;
+    border: 3px solid var(--color-dark-shade);
+    background-color: var(--color-second-accent);
+    color: var(--color-dark-shade);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.userCardBtnUnFollow {
+    margin-top: 10px;
+    height: 50px;
+    width: 125px;
+    border-radius: 20px;
+    border: 3px solid var(--color-dark-shade);
+    background-color: var(--color-dark-shade);
+    color: var(--color-second-accent);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.containerUserInfo {
+    width: 100%;
+    padding: 40px;
+    margin: 0px 40px;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-dark-shade);
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.userName {
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.userStatus {
+    font-style: italic;
+}
+
+.containerLocation {
+    margin-left: 400px;
+    font-weight: 600;
+}
+
+.userCountry {
+    margin-bottom: 30px;
+}
