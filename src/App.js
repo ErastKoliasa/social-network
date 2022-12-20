@@ -5,6 +5,7 @@ import Profile from './components/Profile/Profile';
 import Footer from './components/Footer/Footer';
 import { Routes, Route } from "react-router-dom";
 import MessagesContainer from './components/Messages/MessagesContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Routes>
           <Route path="/messages" element={<MessagesContainer />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/users" element={<UsersContainer />} />
         </Routes>
       </div>
       <Footer />

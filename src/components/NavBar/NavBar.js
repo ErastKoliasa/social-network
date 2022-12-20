@@ -9,6 +9,7 @@ const NavBar = () => {
                 <ul className={styles.listNav}>
                     <li className={styles.listItem}> <NavLink to={'/profile'} className={classActive} >Profile</NavLink></li>
                     <li className={styles.listItem}> <NavLink to={'/messages'} className={classActive}>Messages</NavLink></li>
+                    <li className={styles.listItem}> <NavLink to={'/users'} className={classActive}>Users</NavLink></li>
                 </ul>
             </nav>
         </aside>
