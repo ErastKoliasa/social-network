@@ -1,21 +1,21 @@
-import photo from '../components/Profile/img/avatar.png'
-
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
+const SET_TOTAL_USERS = "SET_TOTAL_USERS";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const TOGGLE_IS_FETCHING = "TOGGLE_LOADER";
 
 const initialState = {
-    users: [
-        { id: 1, photo: photo, follow: false, fullName: "Taras K.", status: "I'm a boss", location: { city: "Lviv", country: "Ukraine" } },
-        { id: 2, photo: photo, follow: false, fullName: "Roman B.", status: "I'm a boss", location: { city: "Lviv", country: "Ukraine" } },
-        { id: 3, photo: photo, follow: true, fullName: "Nikita M.", status: "I'm a boss", location: { city: "Berlin", country: "Germany" } },
-        { id: 4, photo: photo, follow: false, fullName: "Ruslan P.", status: "I'm a boss", location: { city: "Lviv", country: "Ukraine" } }
-    ]
+    users: [],
+    pageSize: 15,
+    currentPage: 1,
+    totalUsersCount: 0,
+    isFetching: true
 }
 
 const usersPageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FOLLOW:
+        case FOLLOW: 
             return {
                 ...state,
                 users: state.users.map(user => {
@@ -36,10 +36,13 @@ const usersPageReducer = (state = initialState, action) => {
                 })
             }
         case SET_USERS:
-            return {
-                ...state,
-                users: [...state.users, ...action.users]
-            }
+            return {...state, users: action.users}
+        case SET_TOTAL_USERS:
+            return {...state, totalUsersCount: action.totalUsersCount}
+        case SET_CURRENT_PAGE:
+            return {...state, currentPage: action.pageNumber}
+        case TOGGLE_IS_FETCHING:
+            return {...state, isFetching: action.isFetching}
         default:
             return state;
     }
@@ -47,6 +50,9 @@ const usersPageReducer = (state = initialState, action) => {
 
 export const followActionCreator = (userId) => ({ type: FOLLOW, userId: userId });
 export const unFollowActionCreator = (userId) => ({ type: UNFOLLOW, userId: userId });
-export const setUserActionCreator = (users) => ({ type: SET_USERS, users: users })
+export const setUserActionCreator = (users) => ({ type: SET_USERS, users });
+export const setTotalUsersActionCreator = (totalUsersCount) => ({type: SET_TOTAL_USERS, totalUsersCount });
+export const setCurrentPageActionCreator = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber });
+export const toggleIsFeatchingActionCreator = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 
 export default usersPageReducer;
