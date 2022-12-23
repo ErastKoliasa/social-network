@@ -2,10 +2,27 @@
     padding: 70px;
 }
 
+.usersHeader {
+    display:  flex;
+    justify-content: space-between;
+    margin-right: 5%;
+}
+
 .title {
     font-size: 36px;
     font-weight: 600;
     color: var(--color-dark-shade);
+}
+
+.pages {
+    margin: 10px;
+    font-size: 24px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.page {
+    color: var( --color-first-accent);
+    font-size: 30px;
 }
 
 .userCard {
@@ -57,6 +74,7 @@
     padding: 40px;
     margin: 0px 40px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     border: 1px solid var(--color-dark-shade);
     border-radius: 20px;
@@ -73,7 +91,6 @@
 }
 
 .containerLocation {
-    margin-left: 400px;
     font-weight: 600;
 }
 
