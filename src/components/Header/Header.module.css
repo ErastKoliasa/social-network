@@ -1,6 +1,10 @@
 .header {
   grid-area: header;
   background-color: var(--color-main);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .containerLogo{
@@ -9,4 +13,12 @@
 
 .logo {
   width: 200px;
+}
+
+.login {
+  color: var(--color-second-accent);
+  font-size: 24px;
+  font-weight: 600;
+  margin-right: 30px;
+  text-decoration: none;
 }

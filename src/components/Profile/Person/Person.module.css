@@ -1,0 +1,28 @@
+.person {
+    margin: 50px;
+    display: flex;
+    flex-direction: row;
+}
+
+.containerPersonInfo {
+    margin-left: 60px;
+}
+
+.personPhoto {
+    width: 200px;
+}
+
+.fullname {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--color-first-accent);
+}
+
+.aboutMe {
+    font-size: 24px;
+    font-style: italic;
+}
+
+p {
+    margin-bottom: 5px;
+}
