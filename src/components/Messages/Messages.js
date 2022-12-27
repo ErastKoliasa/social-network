@@ -2,6 +2,7 @@ import React, { createRef } from "react";
 import styles from './Messages.module.css'
 import Conversations from './Conversations/Conversations'
 import DialogsItem from "./DialogsItem/DialogsItem";
+import { Navigate } from "react-router-dom";
 
 const Messages = (props) => {
     const conversation = props.conversation.map(data => <Conversations name={data.name} key={data.id} id={data.id} />)
@@ -17,6 +18,8 @@ const Messages = (props) => {
         const text = myMessage.current.value;
         props.messageChange(text);
     }
+
+    if(!props.isAuth) return <Navigate to="/login" />
 
     return (
         <div className={styles.messages}>
