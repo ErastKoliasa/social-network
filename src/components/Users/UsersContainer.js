@@ -1,32 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
-import { followActionCreator, setCurrentPageActionCreator, setTotalUsersActionCreator, setUserActionCreator, toggleIsFeatchingActionCreator, toggleIsFollowingProgressActionCreator, unFollowActionCreator } from "../../redux/usersPageReducer";
+import {followThunkCreator, getUsersThunkCreator, onChangePageThunkCreator, unfollowThunkCreator } from "../../redux/usersPageReducer";
 import Users from "./Users";
 import PreLoader from "../PreLoader/PreLoader";
-import { usersAPI } from "../../api/usersAPI";
 
 class UsersAPIComponent extends React.Component {
     constructor(props) {
         super(props);
     }
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items)
-                this.props.setTotalUsers(data.totalCount)
-            });
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
     }
 
     onChangePage = (pageNumber) => {
-        this.props.toggleIsFetching(true);
-        this.props.setCurrentPage(pageNumber);
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items);
-            });
+        this.props.onChangePageThunkCreator(pageNumber, this.props.pageSize)   
     }
 
     onLoader = () => {
@@ -43,8 +30,7 @@ class UsersAPIComponent extends React.Component {
                 unFollow={this.props.unFollow}
                 follow={this.props.follow}
                 loader={this.onLoader}
-                followingInProgress={this.props.followingInProgress}
-                toggleIsFollowinProgress={this.props.toggleIsFollowinProgress} />
+                followingInProgress={this.props.followingInProgress}/>
         )
     }
 }
@@ -62,13 +48,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        follow: (userId) => dispatch(followActionCreator(userId)),
-        unFollow: (userId) => dispatch(unFollowActionCreator(userId)),
-        setUsers: (users) => dispatch(setUserActionCreator(users)),
-        setTotalUsers: (totalUsers) => dispatch(setTotalUsersActionCreator(totalUsers)),
-        setCurrentPage: (pageNumber) => dispatch(setCurrentPageActionCreator(pageNumber)),
-        toggleIsFetching: (isFetching) => dispatch(toggleIsFeatchingActionCreator(isFetching)),
-        toggleIsFollowinProgress:(isFetching, userId) => dispatch(toggleIsFollowingProgressActionCreator(isFetching, userId))
+        follow: (userId) => dispatch(followThunkCreator(userId)),
+        unFollow: (userId) => dispatch(unfollowThunkCreator(userId)),
+        getUsersThunkCreator: (currentPage, pageSize) => dispatch (getUsersThunkCreator(currentPage, pageSize)),
+        onChangePageThunkCreator: (pageNumber, pageSize) => dispatch(onChangePageThunkCreator(pageNumber, pageSize)),
     }
 }
 

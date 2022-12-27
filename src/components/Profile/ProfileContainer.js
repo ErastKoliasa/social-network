@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { setUserProfileActionCreator } from '../../redux/profilePageReducer';
+import { getUserProfileThunkCreator } from '../../redux/profilePageReducer';
 import { useParams } from 'react-router-dom';
-import { profileAPI } from '../../api/profileAPI';
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -11,14 +10,11 @@ class ProfileContainer extends React.Component {
     if (!userId) {
       userId = 2;
     }
-
-    profileAPI.getProfile(userId).then(data => {
-      this.props.setUserProfile(data);
-    });
+    this.props.getUserProfile(userId)
   }
   render() {
     return (
-      <Profile {...this.props} profile={this.props.profile} />
+      <Profile profile={this.props.profile}/>
     )
   }
 }
@@ -28,7 +24,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setUserProfile: (user) => dispatch(setUserProfileActionCreator(user))
+  getUserProfile: (user) => dispatch(getUserProfileThunkCreator(user))
 });
 
 const WithURLContainerComponent = (props) => {
