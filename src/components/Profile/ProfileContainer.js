@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Profile from './Profile';
 import { getUserProfileThunkCreator } from '../../redux/profilePageReducer';
 import { useParams } from 'react-router-dom';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -14,14 +15,15 @@ class ProfileContainer extends React.Component {
   }
   render() {
     return (
-      <Profile profile={this.props.profile} isAuth={this.props.isAuth}/>
+      <Profile {...this.props} profile={this.props.profile} />
     )
   }
 }
 
+const AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+
 const mapStateToProps = (state) => ({
-  profile: state.profilePage.profile,
-  isAuth: state.auth.isAuth
+  profile: state.profilePage.profile
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -29,7 +31,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const WithURLContainerComponent = (props) => {
-  return <ProfileContainer {...props} params={useParams()} />
+  return <AuthRedirectComponent {...props} params={useParams()} />
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WithURLContainerComponent);
