@@ -3,6 +3,7 @@ import { profileAPI } from "../api/profileAPI";
 const ADD_NEW_POST = "ADD-NEW-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_STATUS = "SET_STATUS";
 
 const initialState = {
     postsData: [
@@ -12,7 +13,8 @@ const initialState = {
         { id: 1, post: "post 1" }
     ],
     newPostText: "",
-    profile: null
+    profile: null,
+    status: ""
 };
 
 const profilePageReducer = (state = initialState, action) => {
@@ -34,6 +36,9 @@ const profilePageReducer = (state = initialState, action) => {
         case SET_USER_PROFILE: {
             return { ...state, profile: action.profile }
         }
+        case SET_STATUS: {
+            return { ...state, status: action.status }
+        }
         default:
             return state;
     }
@@ -42,11 +47,30 @@ const profilePageReducer = (state = initialState, action) => {
 export const addNewPostActionCreator = () => ({ type: ADD_NEW_POST });
 export const setUserProfileActionCreator = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
+export const setStatusActionCreator = (status) => ({ type: SET_STATUS, status });
 
 export const getUserProfileThunkCreator = (userId) => {
     return (dispatch) => {
         profileAPI.getProfile(userId).then(data => {
             dispatch(setUserProfileActionCreator(data));
+        });
+    }
+}
+
+export const getStatusThunkCreator = (userId) => {
+    return (dispatch) => {
+        profileAPI.getStatus(userId).then(data => {
+            dispatch(setStatusActionCreator(data));
+        });
+    }
+}
+
+export const updateStatusThunkCreator = (status) => {
+    return (dispatch) => {
+        profileAPI.updateStatus(status).then(data => {
+            if (data.resulCode === 0) {
+                dispatch(setStatusActionCreator(status));
+            }
         });
     }
 }
