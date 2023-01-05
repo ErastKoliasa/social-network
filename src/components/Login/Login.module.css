@@ -1,0 +1,52 @@
+.loginPage {
+    text-align: center;
+    margin: 70px;
+}
+
+.title {
+    font-weight: 900;
+    color: var(--color-dark-shade);
+    margin: 20px;
+}
+
+.formLogin {
+    margin: 10px 30%;
+    padding: 30px;
+    border-radius: 30px;
+    border: 3px solid var(--color-first-accent);
+    color: var(--color-dark-shade);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.inputLogin {
+    height: 30px;
+    width: 250px;
+    margin: 10px;
+    border: 1px solid var( --color-first-accent);
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.checkboxLogin {
+    margin: 10px;
+    margin-right: 20%;
+}
+
+.btnLogin {
+    width: 250px;
+    padding: 10px;
+    border-radius: 20px;
+    border: 3px solid var(--color-first-accent);
+    background-color: var(--color-second-accent);
+    color: var(--color-first-accent);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btnLogin:hover {
+    color: white;
+    background-color: var(--color-first-accent);
+}

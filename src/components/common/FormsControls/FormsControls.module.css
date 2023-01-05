@@ -1,0 +1,10 @@
+.error input,
+.error textarea {
+    display: flex;
+    flex-direction: column;
+    border: solid 2px red;
+}
+.error span {
+    font-size: 18px;
+    color: red;
+}
