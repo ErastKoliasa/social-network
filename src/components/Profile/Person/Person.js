@@ -1,5 +1,5 @@
 import React from 'react';
-import PreLoader from '../../PreLoader/PreLoader';
+import PreLoader from '../../common/PreLoader/PreLoader';
 import styles from './Person.module.css'
 import photo from '../../../assets/img/avatar.png'
 import ProfileStatus from './ProfileStatus';

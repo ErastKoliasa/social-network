@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import {followThunkCreator, getUsersThunkCreator, onChangePageThunkCreator, unfollowThunkCreator } from "../../redux/usersPageReducer";
 import Users from "./Users";
-import PreLoader from "../PreLoader/PreLoader";
+import PreLoader from "../common/PreLoader/PreLoader";
 
 class UsersAPIComponent extends React.Component {
     constructor(props) {
