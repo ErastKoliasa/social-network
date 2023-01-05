@@ -22,3 +22,14 @@
   margin-right: 30px;
   text-decoration: none;
 }
+
+.btnLogout {
+  background-color: var(--color-main);
+  border: 3px solid var(--color-second-accent);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-second-accent);
+  cursor: pointer;
+}
