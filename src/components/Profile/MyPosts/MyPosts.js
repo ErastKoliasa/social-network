@@ -1,28 +1,40 @@
 import React from 'react';
+import { Field, Form } from 'react-final-form';
+import { composeValidators, maxLength, required } from '../../../utils/validators/validators';
+import { TextArea } from '../../common/FormsControls/FormsControls';
 import styles from './MyPosts.module.css'
 import Post from './Post/Post';
 
+const MyPostsForm = (props) => {
+    return (
+        <Form onSubmit={props.onSubmit}>
+            {({ handleSubmit }) => (
+                <form onSubmit={handleSubmit} >
+                    <div className={styles.containerInputBtn}>
+                        <Field name="post"
+                            component={TextArea}
+                            placeholder="Enter your post"
+                            validate={composeValidators(required, maxLength(240))}
+                            className={styles.textInput} />
+                        <button className={styles.btnInput}>Add Post</button>
+                    </div>
+                </form>
+            )}
+        </Form>
+    )
+}
+
 const MyPosts = (props) => {
-    const posts = props.posts.map(data => <Post post={data.post} key={data.id}/>)
+    const posts = props.posts.map(data => <Post post={data.post} key={data.id} />)
 
-    const newMyPost = React.createRef();
-
-    const onAddPost = () => {
-        props.addPost();
-    }
-
-    const onPostChange = () => {
-        const text = newMyPost.current.value;
-        props.postChange(text);
+    const addNewPost = (value) => {
+        props.addPost(value.post)
     }
 
     return (
         <div className={styles.myPosts}>
             <h3 className={styles.title}>My Posts</h3>
-            <div className={styles.containerInputBtn}>
-                <textarea ref={newMyPost} className={styles.textInput} onChange={onPostChange} value={props.newPostText}></textarea>
-                <button onClick={onAddPost} className={styles.btnInput}>Add Post</button>
-            </div>
+            <MyPostsForm onSubmit={addNewPost} />
             <div className={styles.postItem}>
                 {posts}
             </div>
