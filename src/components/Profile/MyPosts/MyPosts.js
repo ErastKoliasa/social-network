@@ -26,7 +26,7 @@ const MyPostsForm = (props) => {
 }
 
 const MyPosts = React.memo(props => {
-    const posts = props.posts.map(data => <Post post={data.post} key={data.id} />)
+    const posts = [...props.posts].map(data => <Post post={data.post} key={data.id} />).reverse()
 
     const addNewPost = (value) => {
         props.addPost(value.post)
