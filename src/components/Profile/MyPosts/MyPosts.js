@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Field, Form } from 'react-final-form';
 import { composeValidators, maxLength, required } from '../../../utils/validators/validators';
 import { TextArea } from '../../common/FormsControls/FormsControls';
 import styles from './MyPosts.module.css'
 import Post from './Post/Post';
+
 
 const MyPostsForm = (props) => {
     return (
@@ -24,7 +25,7 @@ const MyPostsForm = (props) => {
     )
 }
 
-const MyPosts = (props) => {
+const MyPosts = React.memo(props => {
     const posts = props.posts.map(data => <Post post={data.post} key={data.id} />)
 
     const addNewPost = (value) => {
@@ -41,5 +42,5 @@ const MyPosts = (props) => {
         </div>
 
     )
-}
+})
 export default MyPosts;
