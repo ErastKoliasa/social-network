@@ -1,12 +1,12 @@
 import { usersAPI } from "../api/usersAPI";
 
-const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SET_USERS";
-const SET_TOTAL_USERS = "SET_TOTAL_USERS";
-const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
-const TOGGLE_IS_FETCHING = "TOGGLE_LOADER";
-const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS";
+const FOLLOW = "users/FOLLOW";
+const UNFOLLOW = "users/UNFOLLOW";
+const SET_USERS = "users/SET_USERS";
+const SET_TOTAL_USERS = "users/SET_TOTAL_USERS";
+const SET_CURRENT_PAGE = "users/SET_CURRENT_PAGE";
+const TOGGLE_IS_FETCHING = "users/TOGGLE_LOADER";
+const TOGGLE_IS_FOLLOWING_PROGRESS = "users/TOGGLE_IS_FOLLOWING_PROGRESS";
 
 const initialState = {
     users: [],
@@ -68,50 +68,43 @@ export const toggleIsFetchingActionCreator = (isFetching) => ({ type: TOGGLE_IS_
 export const toggleIsFollowingProgressActionCreator = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId })
 
 export const getUsersThunkCreator = (currentPage, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleIsFetchingActionCreator(true));
-        usersAPI.getUsers(currentPage, pageSize)
-            .then(data => {
-                dispatch(toggleIsFetchingActionCreator(false));
-                dispatch(setUserActionCreator(data.items));
-                dispatch(setTotalUsersActionCreator(data.totalCount));
-            });
+        const data = await usersAPI.getUsers(currentPage, pageSize);
+        dispatch(toggleIsFetchingActionCreator(false));
+        dispatch(setUserActionCreator(data.items));
+        dispatch(setTotalUsersActionCreator(data.totalCount));
     }
 }
 
 export const onChangePageThunkCreator = (pageNumber, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleIsFetchingActionCreator(true));
         dispatch(setCurrentPageActionCreator(pageNumber));
-        usersAPI.getUsers(pageNumber, pageSize)
-            .then(data => {
-                dispatch(toggleIsFetchingActionCreator(false));
-                dispatch(setUserActionCreator(data.items));
-            });
+        const data = await usersAPI.getUsers(pageNumber, pageSize);
+        dispatch(toggleIsFetchingActionCreator(false));
+        dispatch(setUserActionCreator(data.items));
     }
 }
 
+const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
+    dispatch(toggleIsFollowingProgressActionCreator(true, userId))
+        const data = await apiMethod(userId);
+        if (data.resultCode === 0) {
+            dispatch(actionCreator(userId))
+        }
+        dispatch(toggleIsFollowingProgressActionCreator(false, userId))
+} 
+
 export const followThunkCreator = (userId) => {
-    return (dispatch) => {
-        dispatch(toggleIsFollowingProgressActionCreator(true, userId))
-        usersAPI.follow(userId).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(followActionCreator(userId));
-            }
-            dispatch(toggleIsFollowingProgressActionCreator(false, userId));
-        });
+    return async (dispatch) => {
+        followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), followActionCreator);
     }
 }
 
 export const unfollowThunkCreator = (userId) => {
-    return (dispatch) => {
-        dispatch(toggleIsFollowingProgressActionCreator(true, userId))
-        usersAPI.unFollow(userId).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(unFollowActionCreator(userId))
-            }
-            dispatch(toggleIsFollowingProgressActionCreator(false, userId))
-        });
+    return async (dispatch) => {
+        followUnfollowFlow(dispatch, userId, usersAPI.unFollow.bind(usersAPI), unFollowActionCreator);
     }
 }
 

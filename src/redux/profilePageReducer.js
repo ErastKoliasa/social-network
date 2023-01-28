@@ -1,8 +1,8 @@
 import { profileAPI } from "../api/profileAPI";
 
-const ADD_NEW_POST = "ADD-NEW-POST";
-const SET_USER_PROFILE = "SET_USER_PROFILE";
-const SET_STATUS = "SET_STATUS";
+const ADD_NEW_POST = "profile/ADD-NEW-POST";
+const SET_USER_PROFILE = "profile/SET_USER_PROFILE";
+const SET_STATUS = "profile/SET_STATUS";
 
 const initialState = {
     postsData: [
@@ -38,33 +38,30 @@ const profilePageReducer = (state = initialState, action) => {
     }
 }
 
-export const addNewPostActionCreator = (post) => ({ type: ADD_NEW_POST, post});
+export const addNewPostActionCreator = (post) => ({ type: ADD_NEW_POST, post });
 export const setUserProfileActionCreator = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const setStatusActionCreator = (status) => ({ type: SET_STATUS, status });
 
 export const getUserProfileThunkCreator = (userId) => {
-    return (dispatch) => {
-        profileAPI.getProfile(userId).then(data => {
-            dispatch(setUserProfileActionCreator(data));
-        });
+    return async (dispatch) => {
+        const data = await profileAPI.getProfile(userId);
+        dispatch(setUserProfileActionCreator(data));
     }
 }
 
 export const getStatusThunkCreator = (userId) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userId).then(data => {
-            dispatch(setStatusActionCreator(data));
-        });
+    return async (dispatch) => {
+        const data = await profileAPI.getStatus(userId);
+        dispatch(setStatusActionCreator(data));
     }
 }
 
 export const updateStatusThunkCreator = (status) => {
-    return (dispatch) => {
-        profileAPI.updateStatus(status).then(data => {
-            if (data.resulCode === 0) {
-                dispatch(setStatusActionCreator(status));
-            }
-        });
+    return async (dispatch) => {
+        const data = await profileAPI.updateStatus(status);
+        if (data.resulCode === 0) {
+            dispatch(setStatusActionCreator(status));
+        }
     }
 }
 
