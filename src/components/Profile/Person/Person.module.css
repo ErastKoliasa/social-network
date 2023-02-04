@@ -4,6 +4,16 @@
     flex-direction: row;
 }
 
+.containerPersonPhoto {
+    display: flex;
+    flex-direction: column;
+}
+
+.btnChangePhoto {
+    margin-top: 10px;
+    color: var(--color-first-accent);
+}
+
 .containerPersonInfo {
     margin-left: 60px;
 }
