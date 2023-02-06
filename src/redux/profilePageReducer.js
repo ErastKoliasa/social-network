@@ -25,7 +25,7 @@ const profilePageReducer = (state = initialState, action) => {
             };
             return {
                 ...state,
-                postsData: [newPost, ...state.postsData],
+                postsData: [...state.postsData, newPost ],
             }
         };
         case SET_USER_PROFILE: {
@@ -74,6 +74,14 @@ export const savePhotoThunkcreator = (file) => {
         const data = await profileAPI.savePhoto(file);
         if (data.resulCode === 0) {
             dispatch(savePhotoSuccessActionCreator(data.photos));
+        }
+    }
+}
+export const saveProfileThunkcreator = (profile) => {
+    return async (dispatch) => {
+        const data = await profileAPI.saveProfile(profile);
+        if (data.resulCode === 0) {
+            //dispatch(savePhotoSuccessActionCreator(data.photos));
         }
     }
 }

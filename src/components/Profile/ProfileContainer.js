@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { getStatusThunkCreator, getUserProfileThunkCreator, savePhotoThunkcreator, updateStatusThunkCreator } from '../../redux/profilePageReducer';
+import { getStatusThunkCreator, getUserProfileThunkCreator, savePhotoThunkcreator, saveProfileThunkcreator, updateStatusThunkCreator } from '../../redux/profilePageReducer';
 import { useParams } from 'react-router-dom';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
@@ -31,7 +31,8 @@ class ProfileContainer extends React.Component {
                profile={this.props.profile} 
                status={this.props.status} 
                updateStatus={this.props.updateStatus}
-               savePhoto={this.props.savePhoto}/>
+               savePhoto={this.props.savePhoto}
+               saveProfile={this.props.saveProfile}/>
     )
   }
 }
@@ -49,7 +50,8 @@ const mapDispatchToProps = (dispatch) => ({
   getUserProfile: (user) => dispatch(getUserProfileThunkCreator(user)),
   getStatus: (userId) => dispatch(getStatusThunkCreator(userId)),
   updateStatus: (status) => dispatch(updateStatusThunkCreator(status)),
-  savePhoto: (file) => dispatch(savePhotoThunkcreator(file))
+  savePhoto: (file) => dispatch(savePhotoThunkcreator(file)),
+  saveProfile: (profile) => dispatch(saveProfileThunkcreator(profile))
 });
 
 const WithURLContainerComponent = (props) => {
