@@ -28,10 +28,48 @@
     color: var(--color-first-accent);
 }
 
-.aboutMe {
-    font-size: 24px;
+p {
+    margin: 5px 0px;
 }
 
-p {
-    margin-bottom: 5px;
+.infoTitle {
+    color: var(--color-first-accent);
+    font-size: 20px;
+}
+
+.btn {
+    margin-top: 5px;
+    width: 150px;
+    padding: 5px;
+    border-radius: 20px;
+    border: 3px solid var(--color-first-accent);
+    background-color: var(--color-second-accent);
+    color: var(--color-first-accent);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn:hover {
+    color: white;
+    background-color: var(--color-first-accent);
+}
+
+.input {
+    height: 30px;
+    width: 250px;
+    margin: 10px 0px;
+    border: 1px solid var( --color-first-accent);
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.textArea {
+    height: 60px;
+}
+
+.checkbox {
+    margin: 10px;
+    margin-right: 20%;
 }

@@ -1,6 +1,8 @@
-import React from "react"
+import React from "react";
 import { Field, Form } from "react-final-form";
+import { composeValidators, maxLength, required } from "../../../utils/validators/validators";
 import { Input, TextArea } from "../../common/FormsControls/FormsControls";
+import styles from './Person.module.css'
 
 const MyForm = (props) => {
     return (
@@ -8,23 +10,33 @@ const MyForm = (props) => {
             {({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>
                     <p>
-                        <Field name="fullName" component={Input} placeholder="Full Name"/>
+                        <b className={styles.infoTitle}>My name is:</b>
+                        <Field className={styles.input} name="fullName" component={Input} placeholder="Full Name"
+                               validate={composeValidators(required, maxLength(240))}/>
                     </p>
                     <p>
-                        Looking for a job: 
+                        <b className={styles.infoTitle}>Looking for a job:</b>
                         <Field name="lookingForAJob" component={Input} type="checkbox"/>
                     </p>
                     <p>
-                        My profesional skills:
-                        <Field name="lookingForAJobDescription" component={TextArea} placeholder="My profesional skills"/>
+                        <b className={styles.infoTitle}>My profesional skills:</b>
+                        <Field className={`${styles.input} ${styles.textArea}`} name="lookingForAJobDescription" component={TextArea} placeholder="My profesional skills"/>
                     </p>
-                    <p>About me:
-                        <Field name="aboutMe" component={TextArea} placeholder="About me"/>
+                    <p>
+                        <b className={styles.infoTitle}>About me:</b>
+                        <Field className={`${styles.input} ${styles.textArea}`} name="aboutMe" component={TextArea} placeholder="About me"/>
                     </p>
-                    {/* <p>Contacts: {Object.keys(props.profile.contacts).map(key => {
-            return <Contacts key={key} contactTitle={key} contactValue={props.profile.contacts[key]} />
-        })}</p> */}
-                    <button onClick={() => { }}>Save</button>
+                    <p>
+                        <b className={styles.infoTitle}>Contacts:</b>
+                        {Object.keys(props.profile.contacts).map(key => {
+                             return <div key={key}>
+                                {key}:
+                                <Field className={styles.input} name={`contacts.${key}`} component={Input} placeholder={key}/>
+                             </div>
+                             })
+                        }
+                    </p>
+                    <button className={styles.btn}>Save</button>
                 </form>
             )}
         </Form>
@@ -32,12 +44,9 @@ const MyForm = (props) => {
 }
 
 const ProfileDataForm = (props) => {
-    const onSubmit = (formData) => {
-        props.saveProfile(formData)
-     }
     return (
         <div>
-            <MyForm onSubmit={onSubmit} profile={props.profile} />
+            <MyForm onSubmit={props.onSubmit} profile={props.profile}/>
         </div>
     )
 }

@@ -78,10 +78,11 @@ export const savePhotoThunkcreator = (file) => {
     }
 }
 export const saveProfileThunkcreator = (profile) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
+        const userId = getState().auth.userId;
         const data = await profileAPI.saveProfile(profile);
         if (data.resulCode === 0) {
-            //dispatch(savePhotoSuccessActionCreator(data.photos));
+            dispatch(getUserProfileThunkCreator(userId));
         }
     }
 }

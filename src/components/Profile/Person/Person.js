@@ -19,6 +19,11 @@ const Person = (props) => {
         return <PreLoader />
     }
 
+    const onSubmit = (formData) => {
+        props.saveProfile(formData);
+        setEditMode(false);
+     }
+
     const avatarPhoto = () => {
         if (!props.profile.photos.large) {
             return photo;
@@ -32,7 +37,7 @@ const Person = (props) => {
                 <img className={styles.personPhoto} src={avatarPhoto()}></img>
                 {props.isOwner && <input className={styles.btnChangePhoto} type={"file"} onChange={onMainPhotoSelected} />}
             </div>
-            {editMode ? <ProfileDataForm profile={props.profile} saveProfile={props.saveProfile}/>
+            {editMode ? <ProfileDataForm onSubmit={onSubmit} profile={props.profile}/>
                 : <ProfileData profile={props.profile} isOwner={props.isOwner} goToEditMode={() => { setEditMode(true) }} />}
         </div>
     )
@@ -42,15 +47,23 @@ const ProfileData = (props) => {
     return <div className={styles.containerPersonInfo}>
         <p className={styles.fullname}>{props.profile.fullName}</p>
         <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
-        <p>Looking for a job: {props.profile.lookingForAJob ? "yes" : "no"}</p>
+        <p>
+            <b className={styles.infoTitle}>Looking for a job:</b> {props.profile.lookingForAJob ? "yes" : "no"}
+        </p>
         {props.profile.lookingForAJob &&
-            <p>My profesional skills: {props.profile.lookingForAJobDescription}</p>
+            <p>
+                <b className={styles.infoTitle}>My profesional skills:</b> {props.profile.lookingForAJobDescription}
+            </p>
         }
-        <p className={styles.aboutMe}>About me: {props.profile.aboutMe}</p>
-        <p>Contacts: {Object.keys(props.profile.contacts).map(key => {
-            return <Contacts key={key} contactTitle={key} contactValue={props.profile.contacts[key]} />
-        })}</p>
-        {props.isOwner && <button onClick={props.goToEditMode}>Edit</button>}
+        <p>
+            <b className={styles.infoTitle}>About me:</b> {props.profile.aboutMe}
+        </p>
+        <p>
+            <b className={styles.infoTitle}>Contacts:</b> {Object.keys(props.profile.contacts).map(key => {
+                return <Contacts key={key} contactTitle={key} contactValue={props.profile.contacts[key]} />
+            })}
+        </p>
+        {props.isOwner && <button className={styles.btn} onClick={props.goToEditMode}>Edit</button>}
     </div>
 
 }
