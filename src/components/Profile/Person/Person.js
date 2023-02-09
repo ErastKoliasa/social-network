@@ -38,7 +38,11 @@ const Person = (props) => {
                 {props.isOwner && <input className={styles.btnChangePhoto} type={"file"} onChange={onMainPhotoSelected} />}
             </div>
             {editMode ? <ProfileDataForm onSubmit={onSubmit} profile={props.profile}/>
-                : <ProfileData profile={props.profile} isOwner={props.isOwner} goToEditMode={() => { setEditMode(true) }} />}
+                : <ProfileData profile={props.profile} 
+                               status={props.status} 
+                               updateStatus={props.updateStatus} 
+                               isOwner={props.isOwner} 
+                               goToEditMode={() => { setEditMode(true) }} />}
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import './App.css'
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import HeaderContainer from './components/Header/HeaderContainer';
 import React, { Suspense } from 'react';
 import { connect } from 'react-redux';
@@ -17,6 +17,7 @@ class App extends React.Component {
   componentDidMount() {
     this.props.initializeApp();
   }
+
   render() {
     if (!this.props.initialized) {
       return <PreLoader />
@@ -28,12 +29,14 @@ class App extends React.Component {
         <div className='content'>
           <Suspense fallback={<PreLoader />}>
             <Routes>
+              <Route path="/" element={<Navigate to="/profile" />} />
               <Route path="/messages" element={<MessagesContainer />} />
               <Route path="/profile" element={<ProfileContainer />}>
                 <Route path=":userId" element={<ProfileContainer />} />
               </Route>
               <Route path="/users" element={<UsersContainer />} />
               <Route path="/login" element={<Login />} />
+              <Route path="*" element={<div className='notFound'>404 NOT FOUND</div>} />
             </Routes>
           </Suspense>
         </div>
