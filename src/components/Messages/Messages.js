@@ -14,10 +14,11 @@ const AddMessageForm = (props) => {
                     <div>
                         <Field name="message" component={TextArea}
                             placeholder="Enter your message"
-                            validate={composeValidators(required, maxLength(240))} />
+                            validate={composeValidators(required, maxLength(240))} 
+                            className={styles.messageInput}/>
                     </div>
                     <div>
-                        <button>Send</button>
+                        <button className={styles.btnSend}>Send</button>
                     </div>
                 </form>
             )}
