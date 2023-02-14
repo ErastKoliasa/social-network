@@ -20,11 +20,13 @@ const MyForm = (props) => {
                     </p>
                     <p>
                         <b className={styles.infoTitle}>My profesional skills:</b>
-                        <Field className={`${styles.input} ${styles.textArea}`} name="lookingForAJobDescription" component={TextArea} placeholder="My profesional skills"/>
+                        <Field className={`${styles.input} ${styles.textArea}`} name="lookingForAJobDescription" component={TextArea} placeholder="My profesional skills"
+                               validate={composeValidators(required, maxLength(240))}/>
                     </p>
                     <p>
                         <b className={styles.infoTitle}>About me:</b>
-                        <Field className={`${styles.input} ${styles.textArea}`} name="aboutMe" component={TextArea} placeholder="About me"/>
+                        <Field className={`${styles.input} ${styles.textArea}`} name="aboutMe" component={TextArea} placeholder="About me"
+                               validate={composeValidators(required, maxLength(240))}/>
                     </p>
                     <p>
                         <b className={styles.infoTitle}>Contacts:</b>

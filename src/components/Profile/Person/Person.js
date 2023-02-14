@@ -22,7 +22,7 @@ const Person = (props) => {
     const onSubmit = (formData) => {
         props.saveProfile(formData);
         setEditMode(false);
-     }
+    }
 
     const avatarPhoto = () => {
         if (!props.profile.photos.large) {
@@ -37,12 +37,12 @@ const Person = (props) => {
                 <img className={styles.personPhoto} src={avatarPhoto()}></img>
                 {props.isOwner && <input className={styles.btnChangePhoto} type={"file"} onChange={onMainPhotoSelected} />}
             </div>
-            {editMode ? <ProfileDataForm onSubmit={onSubmit} profile={props.profile}/>
-                : <ProfileData profile={props.profile} 
-                               status={props.status} 
-                               updateStatus={props.updateStatus} 
-                               isOwner={props.isOwner} 
-                               goToEditMode={() => { setEditMode(true) }} />}
+            {editMode ? <ProfileDataForm onSubmit={onSubmit} profile={props.profile} />
+                : <ProfileData profile={props.profile}
+                    status={props.status}
+                    updateStatus={props.updateStatus}
+                    isOwner={props.isOwner}
+                    goToEditMode={() => { setEditMode(true) }} />}
         </div>
     )
 }
@@ -54,11 +54,9 @@ const ProfileData = (props) => {
         <p>
             <b className={styles.infoTitle}>Looking for a job:</b> {props.profile.lookingForAJob ? "yes" : "no"}
         </p>
-        {props.profile.lookingForAJob &&
-            <p>
-                <b className={styles.infoTitle}>My profesional skills:</b> {props.profile.lookingForAJobDescription}
-            </p>
-        }
+        <p>
+            <b className={styles.infoTitle}>My profesional skills:</b> {props.profile.lookingForAJobDescription}
+        </p>
         <p>
             <b className={styles.infoTitle}>About me:</b> {props.profile.aboutMe}
         </p>
